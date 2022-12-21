@@ -9,6 +9,7 @@ const SignupControll= async(req:Request,res:Response)=>{
     //Get the Pawword To Hshed And Email To Search If Email Already Reguster
     const{password,email}=req.body;
 
+
     try{
         //Hashing Password Befor Insert Database
         let hashPassword=await hash(password,10);
@@ -16,21 +17,20 @@ const SignupControll= async(req:Request,res:Response)=>{
         //Add New Hashing Password To Data
         req.body.password=hashPassword;
 
-
         //Check Database If Any User Have Same Email
-        let user=await Models.findAll(TableEnum.regusters,"email",email)
+        let user=await Models.findAll(TableEnum.regusters,"email",email);
         
         //If Email Is Taken Response Erorr
-        if(user.length>0){res.json({status:"Email Is Taken"});}
+        if(user.length>0){
+            res.status(404).json({status:"Email Is Taken"})
+        }else{
 
-        //If Email Not Token Creat New User
-            if(user<1){
-                await Models.create(TableEnum.regusters,req.body);
-                res.json("Email Has Been Reguster")         
-            }
+            let datause= await Models.create(TableEnum.regusters,req.body)
+            res.status(200).json("Email Has Been Reguster")         
+        }
 
     }
-    catch(err){ res.status(403).send('There Is Problem In Register')}
+    catch(err){ res.status(404).send('There Is Problem In Register')}
 }
 
 

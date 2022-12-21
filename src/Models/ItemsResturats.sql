@@ -1,6 +1,7 @@
 create table itemes (
+	id  SERIAL PRIMARY KEY NOT NULL,
 	itemid VARCHAR(500) ,
-	price INTEGER,
+	price float,
 	description VARCHAR(10000),
 	productname VARCHAR(100),
 	quantity INTEGER DEFAULT 10 NOT NULL,

@@ -1,8 +1,12 @@
 create table resturants (
+	id  SERIAL PRIMARY KEY NOT NULL,
 	restaurantid VARCHAR(1000) ,
-	restaurantname VARCHAR(1000),
-	images VARCHAR(10000),
-	categories VARCHAR(100),
-	rate VARCHAR(50),
-	freedelivery VARCHAR(50)
+	restaurantname VARCHAR(100),
+	images VARCHAR(5000),
+	categories VARCHAR(50),
+	rate float,
+	freedelivery boolean,
+	fastdelevery boolean,
+	place VARCHAR(50),
+	numberrate INTEGER
 );

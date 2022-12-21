@@ -7,14 +7,14 @@ let secrete:any=process.env.ACCESS_TOKEN_SECRET
 const createAccessToken =(user:any)=> sign({
 
     //the information will save in payload section information of user
-    fullName:user.fullName,
+    fullname:user.fullname,
+    email:user.email,
     image:user.image,
     regusterid:user.regusterid,
     role:user.role
 },
 //the segniture you use in the access token
 secrete,
-
 //the token will expire after these time
 {expiresIn:"1d"}
 );

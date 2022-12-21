@@ -1,9 +1,6 @@
 import { GraphQLList, GraphQLID } from "graphql";
-import Database from "../../../Database/Database";
-import {TableEnum} from "../../../Quires/QuiresClass"
-
+import {Models, TableEnum} from "../../../Quires/QuiresClass"
 import {RestaurentType} from "../../TypeItem/ResturantType";
-import { CutomModels } from "./CustomSql/CustomQuiers";
 
 
 const SearchQuery ={
@@ -11,8 +8,8 @@ const SearchQuery ={
     args:{restaurantname:{type:GraphQLID}},
 
     resolve(parent:any,args:any){
-      return CutomModels.SearchResturant(TableEnum.resturants,
-        "restaurantname",args.restaurantname)
+      return Models.search(TableEnum.resturants,
+        "restaurantname",args.restaurantname)      
     }
 }
 

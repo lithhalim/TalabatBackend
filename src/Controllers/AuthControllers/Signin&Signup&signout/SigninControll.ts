@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import createAccessToken from "../../../Token/AccessToken";
 import createRefreshToken from "../../../Token/RefreshToken";
-
 import { Models,TableEnum } from "../../../Quires/QuiresClass";
 
 
@@ -12,19 +11,18 @@ const SigninControll= async (req:Request|any,res:Response)=>{
     try {
 
         //Invoket The AccessToken And Refresh Token
-        let accessToken= createAccessToken(req.basicAuth);
-        let refreshToken=createRefreshToken(req.basicAuth);
-
+        let accessToken= createAccessToken(req.basicAuth[0]);
+        let refreshToken=createRefreshToken(req.basicAuth[0]);
 
         await Models.update(TableEnum.regusters,"email",req.basicAuth[0].email,
             {accesstoken:accessToken,refreshtoken:refreshToken})
 
-
         res.status(200).json(
-          {accessToken:accessToken,refreshToken:refreshToken});
+          {accessToken:accessToken,
+            refreshToken:refreshToken});
         }
      catch (error) {
-       res.status(403).send('There Is Problem In SignIn');
+       res.status(404).send(error);
        }
       
 }

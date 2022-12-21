@@ -7,8 +7,9 @@ import {Models,TableEnum} from "../../Quires/QuiresClass"
 
 
 const BasicAuth= async (req:Request|any,res:Response,next:NextFunction)=>{
+
     
-        let basicHeaderParts = req.headers.authorization.split(' ');  // ['Basic', 'KDHKJAHKJDSHJKASHJK']
+        let basicHeaderParts = req.body.headers.authorization.split(' ');  // ['Basic', 'KDHKJAHKJDSHJKASHJK']
         let encodedString = basicHeaderParts.pop();  // KDHKJAHKJDSHJKASHJK
         let decodedString = decode(encodedString); // "USERNAME:PASSWORD"
         let [email,password]=decodedString.split(":");
@@ -28,12 +29,12 @@ const BasicAuth= async (req:Request|any,res:Response,next:NextFunction)=>{
                 req.basicAuth=user
                 next()
             }else{
-                res.json({accessToken:"Error Email Or Password"})
+                res.status(404).send("Error Paassword Or Email")
             }
         }
         catch (error) { 
-            res.status(403);
-            res.send("Error Email Or Password");
+            res.status(404);
+            res.send(error);
         }
 }
 

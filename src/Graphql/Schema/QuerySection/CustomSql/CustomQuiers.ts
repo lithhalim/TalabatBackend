@@ -10,58 +10,19 @@ enum TableEnum{
 
 class Crud_Collection{
 
-        async getCatagories(NameTable:TableEnum,columnName:string,
-            columnValue:string,LIMIT:string,OFFSET:string){
-
+        async getCatagories(NameTable:TableEnum,WHEREDATA:string,
+            LIMIT:string,OFFSET:string,FilterData:any){
             try{
                 let sql=`SELECT * FROM  ${TableEnum[NameTable]} 
-                WHERE ${columnName}='${columnValue}' LIMIT ${LIMIT} OFFSET ${OFFSET};`
-
-                const DataUse=await Database.query(sql);
-
-                return DataUse.rows
-
+                WHERE ${WHEREDATA} ${FilterData} 
+                LIMIT ${LIMIT} OFFSET ${OFFSET} ;`;
+                
+                const DataUse= Database.query(sql);
+                return (await DataUse).rows
             }catch(error:any){
                     return error.detail
             }
         }
-
-        async SearchResturant(NameTable:TableEnum,columnName:string,
-            columnValue:string){
-
-            try{
-
-                let sql=`SELECT * FROM ${TableEnum[NameTable]} 
-                WHERE ${columnName} LIKE '%${columnValue}%';`  
-
-                const DataUse= await Database.query(sql)
-                return DataUse.rows
-
-            }catch(error:any){
-                    return error.detail
-            }
-        }
-
-
-
-        async CountNumber(NameTable:TableEnum,columnName:string,
-            columnValue:string){
-
-            try{
-
-                let sql=`SELECT COUNT(*) FROM ${TableEnum[NameTable]} 
-                WHERE ${columnName} = '${columnValue}';`  
-
-                const DataUse= await Database.query(sql)
-                return DataUse.rows
-
-            }catch(error:any){
-                    return error.detail
-            }
-        }
-
-
-
     
 }
 

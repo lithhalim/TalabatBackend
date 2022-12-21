@@ -6,11 +6,11 @@ let secrete:any=process.env.REFRESH_TOKEN_SECRET
 const createRefreshToken =(user:any)=> sign({
 
     //the information will save in payload section information of user
-    fullName:user.fullName,
+    fullname:user.fullname,
+    email:user.email,
     image:user.image,
     regusterid:user.regusterid,
     role:user.role
-
     },
     //the signeture you use in the access token
     secrete ,
