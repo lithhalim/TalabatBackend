@@ -22,8 +22,14 @@ const RestaurentType=new GraphQLObjectType({
       rate:{
         type:GraphQLString,
       },
+      numberrate:{
+        type:GraphQLInt
+      },
       freedelivery:{
         type:GraphQLString,
+      },
+      fastdelevery:{
+        type:GraphQLString
       },
       allitems:{
         type:new GraphQLList(ItemsType),

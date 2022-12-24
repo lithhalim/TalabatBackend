@@ -17,13 +17,14 @@ const SigninControll= async (req:Request|any,res:Response)=>{
         await Models.update(TableEnum.regusters,"email",req.basicAuth[0].email,
             {accesstoken:accessToken,refreshtoken:refreshToken})
 
-        res.status(200).json(
-          {accessToken:accessToken,
-            refreshToken:refreshToken});
+        res.json(
+          {status:"User Has Reguster", 
+           accessToken:accessToken,
+           refreshToken:refreshToken});
         }
      catch (error) {
-       res.status(404).send(error);
-       }
+       res.json({status:"Email Or Password Wrong"})
+    }
       
 }
 
