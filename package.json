@@ -17,7 +17,7 @@
     "@types/express": "^4.17.13",
     "@types/node": "^18.7.16",
     "base-64": "^1.0.0",
-    "bcrypt": "*",
+    "bcrypt": "6.0.0",
     "concurrently": "^7.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
